@@ -47,3 +47,5 @@ func (m Matrix) inside(row int, col int) bool {
 	insideCols := 0 <= col && col < m.nrCols
 	return insideRows && insideCols
 }
+
+func 

@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func parse(filePath string) matrix.Matrix {
+func Parse(filePath string) matrix.Matrix {
 	file, err := os.Open(filePath)
 	if err == nil {
 		reader := bufio.NewScanner(file)
