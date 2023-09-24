@@ -10,6 +10,10 @@ type Point struct {
 	Y int
 }
 
+func (p Point) Add(other Point) Point {
+	return Point{p.X + other.X, p.Y + other.Y}
+}
+
 type Matrix struct {
 	arr    []int
 	nrRows int
