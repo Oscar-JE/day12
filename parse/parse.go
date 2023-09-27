@@ -13,15 +13,9 @@ func Parse(filePath string) (matrix.Matrix, matrix.Point, matrix.Point) {
 		reader := bufio.NewScanner(file)
 		m = parseMatrix(reader)
 		start := m.FindFirst(ConvertToHeight('S'))
-		errStart := m.Set(start.X, start.Y, ConvertToHeight('a'))
+		m.Set(start.X, start.Y, ConvertToHeight('a'))
 		end := m.FindFirst(ConvertToHeight('E'))
-		errEnd := m.Set(end.X, end.Y, ConvertToHeight('z'))
-		if errStart != nil {
-			panic(errStart)
-		}
-		if errEnd != nil {
-			panic(errEnd)
-		}
+		m.Set(end.X, end.Y, ConvertToHeight('z'))
 		return m, start, end
 	}
 
@@ -33,7 +27,7 @@ func parseMatrix(scanner *bufio.Scanner) matrix.Matrix {
 	if scanner.Scan() {
 		line = scanner.Text()
 	}
-	m := matrix.Init(len(line))
+	m := matrix.Init()
 	row := convert(line)
 	m.Append(row)
 	for scanner.Scan() {
@@ -45,13 +39,24 @@ func parseMatrix(scanner *bufio.Scanner) matrix.Matrix {
 }
 
 func convert(line string) []int {
+	runes := []rune(line)
 	row := []int{}
-	for _, char := range line {
-		row = append(row, ConvertToHeight(char))
+	j := 0
+	for j < len(line) {
+		row = append(row, ConvertToHeight(runes[j]))
+		j++
 	}
 	return row
 }
 
 func ConvertToHeight(char rune) int {
-	return int(char) - int('a')
+	heights := "abcdefghijklmnopqrstuvwxyz"
+	h := 0
+	for _, r := range heights {
+		if r == char {
+			break
+		}
+		h++
+	}
+	return h
 }

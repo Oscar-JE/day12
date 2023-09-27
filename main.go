@@ -1,7 +1,7 @@
 package main
 
 import (
-	"day12/montain"
+	"day12/mountain"
 	"day12/parse"
 	"fmt"
 )
@@ -9,12 +9,13 @@ import (
 func main() {
 	//m, start, end := parse.Parse("input_short.txt")
 	m, start, end := parse.Parse("input.txt")
+	//m, start, end := parse.Parse("input_test_medium.txt")
+	//m, start, end := parse.Parse("day12cc.txt")
 	fmt.Println(m)
-	fmt.Println(start)
-	fmt.Println(end)
-	montain := montain.Init(m, end)
-	montain.PrintPathValues()
-	montain.CalcPathValues()
-	montain.PrintPathValues()
-	fmt.Println(montain.GetPathValue(start.X, start.Y))
+	//fmt.Println(start)
+	//fmt.Println(end)
+	mountain := mountain.Init(m, start)
+	mountain.CalcPathValues()
+	mountain.PrintPathValues()
+	fmt.Println(mountain.GetPathValue(end.X, end.Y))
 }

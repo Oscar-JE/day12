@@ -5,10 +5,12 @@ import (
 )
 
 func TestConvertToHeight(t *testing.T) {
-	res1 := ConvertToHeight('a')
-	res2 := ConvertToHeight('b')
-	if res1 != 0 && res2 != 1 {
-		t.Errorf("something wrong with convert to height")
+	res1 := []rune("abcdefghijklmnopqrstuvwxyz")
+	expected := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+	for index := range res1 {
+		if expected[index] != ConvertToHeight(res1[index]) {
+			t.Errorf("alphafan")
+		}
 	}
 }
 
@@ -34,8 +36,8 @@ func slizeEqual(a []int, b []int) bool {
 
 func TestParse(t *testing.T) {
 	m, _, _ := Parse("../input_short.txt")
-	hight, err := m.Get(0, 1)
-	if err != nil || hight != 0 {
+	hight := m.Get(0, 1)
+	if hight != 0 {
 		t.Errorf("wrong behavior in pars method")
 	}
 }
